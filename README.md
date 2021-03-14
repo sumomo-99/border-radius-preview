@@ -8,6 +8,7 @@
 
 ## 開発サーバの起動
 ```bash
+npm install
 npm run dev
 ```
 ブラウザで[http://localhost:3000](http://localhost:3000)にアクセスします。
