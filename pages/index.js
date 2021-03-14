@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Container, Input, Header, Icon, Label, Dropdown } from 'semantic-ui-react'
+import { Container, Input, Header, Icon, Label, Dropdown, Message } from 'semantic-ui-react'
 import Link from 'next/link'
 import Head from 'next/head'
 
@@ -23,6 +23,20 @@ export default function Home() {
     {key: 'inset', value: 'inset', text: 'inset'},
     {key: 'outset', value: 'outset', text: 'outset'},
   ]
+
+  let style = {
+    height: height + 'px',
+    width: width + 'px',
+    borderRadius: radius + 'px',
+    border: borderSize + 'px' + ' ' + border
+  }
+
+  const styleformat = Object.entries(style).map(
+    ([key, value]) => {
+      return(
+        `${key}: ${value};\n`
+      )}
+  )
 
   return (
     <div>
@@ -105,17 +119,32 @@ export default function Home() {
 
       <Container>
         <div className="box" 
-          style={{
-            height: height + 'px',
-            width: width + 'px',
-            borderRadius: radius + 'px',
-            border: borderSize + 'px' + ' ' + border
-          }}
+          style={style}
         ></div>
       </Container>
 
+      <Container className="styleformat" text>
+        <div className="styleformat">
+        <Message>
+          <p>
+            {'{\n'}
+            {styleformat}
+            {'}'}
+          </p>
+        </Message>
+        </div>
+      </Container>
 
       <style jsx global>{`
+      p {
+        white-space: pre-line;
+      }
+
+      .styleformat {
+        margin: 0 auto;
+        width: 20em;
+      }
+
       .container {
         margin: 2em 0 0 0;
       }
