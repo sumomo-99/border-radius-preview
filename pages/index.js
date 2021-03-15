@@ -1,6 +1,14 @@
 import { useState } from 'react'
 import 'semantic-ui-css/semantic.min.css'
-import { Container, Input, Header, Icon, Label, Dropdown, Message } from 'semantic-ui-react'
+import {
+  Button,
+  Container, 
+  Input, 
+  Header, 
+  Icon, 
+  Label, 
+  Dropdown 
+} from 'semantic-ui-react'
 import Link from 'next/link'
 import Head from 'next/head'
 
@@ -37,6 +45,11 @@ export default function Home() {
         `${key}: ${value};\n`
       )}
   )
+
+  const copyClipboard = () => {
+    const copyText = document.querySelector("#styleString").innerText
+    navigator.clipboard.writeText(copyText)
+  }
 
   return (
     <div>
@@ -123,26 +136,35 @@ export default function Home() {
         ></div>
       </Container>
 
-      <Container className="styleformat" text>
+      <Container text>
         <div className="styleformat">
-        <Message>
-          <p>
+          <Button 
+            attached="top" 
+            floated="right" 
+            compact
+            onClick={e => copyClipboard()}
+          >
+            <Icon name="copy outline" />
+            Copy
+          </Button>
+          <p id="styleString">
             {'{\n'}
             {styleformat}
             {'}'}
           </p>
-        </Message>
         </div>
       </Container>
 
       <style jsx global>{`
-      p {
+      #styleString {
         white-space: pre-line;
+        margin: 2em 1em 1em 1em;
       }
 
       .styleformat {
         margin: 0 auto;
         width: 20em;
+        border: 2px solid
       }
 
       .container {
